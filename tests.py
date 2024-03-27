@@ -144,3 +144,4 @@ class TestBooksCollector:
 
         assert collector.get_books_genre() == {'Тьма': ''}
 
+

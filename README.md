@@ -33,4 +33,4 @@
 10. test_delete_book_from_favorites_book_removed_from_favorites
 11. test_delete_nonexisting_book_from_favorites
 12. test_delete_book_from_favorites_delete_books
-13. test_set_book_genre_set_incorrect_genres   
+13. test_set_book_genre_set_incorrect_genres.   
