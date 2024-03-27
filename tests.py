@@ -1,3 +1,4 @@
+import pytest
 from main import BooksCollector
 
 # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
@@ -8,7 +9,7 @@ class TestBooksCollector:
     # обязательно указывать префикс test_
     # дальше идет название метода, который тестируем add_new_book_
     # затем, что тестируем add_two_books - добавление двух книг
-    def test_add_new_book_add_two_books(self):
+    def test_add_new_book_add_two_books(self, book_collector_list):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
@@ -22,3 +23,124 @@ class TestBooksCollector:
 
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
+
+
+class TestBooksCollector:
+    def test_set_book_genre_existent_genre(self,books_list):
+        books_list.set_book_genre('Карлсон', 'Фантастика')
+        assert books_list.books_genre['Карлсон'] == 'Фантастика'
+
+class TestBooksCollector:
+    def test_set_book_genre_nonexistent_genre(self, books_list):
+        books_list.set_book_genre('Карлсон', 'Несуществующий_жанр')
+        assert books_list.books_genre['Карлсон'] == ''
+
+class TestBooksCollector:
+    def test_get_book_genre_existing_genre(self):
+        collector = BooksCollector()
+
+        collector.add_new_book('Карлсон')
+        collector.set_book_genre('Карлсон', 'Мультфильмы')
+
+        assert collector.get_book_genre('Карлсон') == 'Мультфильмы'
+
+class TestBooksCollector:
+    def test_get_books_with_specific_genre_book_present(self):
+        collector = BooksCollector()
+
+        collector.add_new_book('Карлсон')
+        collector.set_book_genre('Карлсон', 'Мультфильмы')
+
+        assert 'Карлсон' in collector.get_books_with_specific_genre('Мультфильмы')
+
+class TestBooksCollector:
+    def test_get_book_genre_with_existing_genre(self):
+        collector = BooksCollector()
+
+        collector.add_new_book('Кто сказал мяу?')
+        collector.set_book_genre('Кто сказал мяу?', 'Детективы')
+
+        assert collector.get_book_genre('Кто сказал мяу?') == 'Детективы'
+
+class TestBooksCollector:
+    def test_get_books_for_children_with_appropriate_genre(self):
+        collector = BooksCollector()
+
+        collector.add_new_book('Карлсон')
+        collector.set_book_genre('Карлсон', 'Мультфильмы')
+
+        assert 'Карлсон' in collector.get_books_for_children()
+
+
+class TestBooksCollector:
+    def test_get_books_for_children_with_inappropriate_genre(self):
+        collector = BooksCollector()
+
+        collector.add_new_book('Ужасы нашего городка')
+        collector.set_book_genre('Ужасы нашего городка', 'Ужасы')
+
+        assert 'Ужасы нашего городка' not in collector.get_books_for_children()
+
+class TestBooksCollector:
+    def test_add_book_in_favorites_added_book(self):
+        collector = BooksCollector()
+
+        collector.add_new_book('Карлсон')
+
+        collector.add_book_in_favorites('Карлсон')
+
+        assert 'Карлсон' in collector.favorites
+
+class TestBooksCollector:
+    def test_add_book_in_favorites_add_two_book_in_favorites(self):
+        collector = BooksCollector()
+        collector.add_new_book('Карлсон')
+        collector.add_new_book('Карлсон2')
+        collector.add_new_book('Карлсон3')
+        collector.add_book_in_favorites('Карлсон')
+        collector.add_book_in_favorites('Карлсон3')
+
+        assert collector.favorites == ['Карлсон', 'Карлсон3']
+
+class TestBooksCollector:
+    def test_delete_book_from_favorites_book_removed_from_favorites(self):
+        collector = BooksCollector()
+
+        collector.add_new_book('Карлсон')
+        collector.add_book_in_favorites('Карлсон')
+
+        collector.delete_book_from_favorites('Карлсон')
+
+        assert 'Карлсон' not in collector.favorites
+
+class TestBooksCollector:
+    def test_delete_nonexisting_book_from_favorites(self):
+        collector = BooksCollector()
+
+        collector.add_new_book('Карлсон')
+        collector.add_book_in_favorites('Карлсон')
+
+        collector.delete_book_from_favorites('Малыш и Карлсон')
+
+        assert 'Карлсон' in collector.favorites
+
+
+    def test_delete_book_from_favorites_delete_books(self):
+        collector = BooksCollector()
+        collector.add_new_book('Тьма')
+        collector.add_new_book('Уроки домохозяек')
+        collector.add_book_in_favorites('Тьма')
+        collector.delete_book_from_favorites('Тьма')
+
+        assert collector.favorites == []
+
+class TestBooksCollector:
+    @pytest.mark.parametrize('genre', ['gg', 'jh'])
+    def test_set_book_genre_set_incorrect_genres(self, genre):
+        collector = BooksCollector()
+
+        collector.add_new_book('Тьма')
+        collector.set_book_genre('Тьма', genre)
+
+        assert collector.get_books_genre() == {'Тьма': ''}
+
