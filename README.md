@@ -30,8 +30,7 @@
 7. test_add_book_in_favorites_added_book - проверка, что книга добавляется в список избранных книг  
 8. test_add_book_in_favorites_add_two_book_in_favorites - проверка, что список избранных книг содержит только добавленные книги
 9. test_delete_book_from_favorites_book_removed_from_favorites - проверка, что книга удаляется из избранного
-10. test_delete_book_from_favorites_nonexisting_book - проверка, что при попытке удалить книгу, которой нет в списке избранных книг, метод delete_book_from_favorites не изменяет состояние списка избранных книг
-11. test_delete_book_from_favorites_delete_books - проверка, что при удалении единственной книги из избранного список избранного становится пустым
-12. test_get_list_of_favorites_books_returns_favorites_list - проверка, что метод get_list_of_favorites_books возвращает список избранных книг
-13. test_get_books_genre_returns_dict - проверка что количество элементов в словаре books_genre соответствует количеству добавленных книг 
+10. test_delete_book_from_favorites_nonexisting_book - проверка, что при попытке удалить книгу, которой нет в списке избранных книг, метод delete_book_from_favorites не изменяет состояние списка избранных книг 
+11. test_get_list_of_favorites_books_returns_favorites_list - проверка, что метод get_list_of_favorites_books возвращает список избранных книг
+12. test_get_books_genre_returns_dict - проверка что количество элементов в словаре books_genre соответствует количеству добавленных книг 
  
